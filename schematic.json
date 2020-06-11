@@ -1,0 +1,33 @@
+{
+    "rooms": [
+        {
+            "name": "chamber",
+            "description": "The room is dark, gloomy and grotty. The four walls lure over you as you have the suspicion that they are getting closer to you.",
+            "directions": {
+                "south": 1
+            },
+            "items": [],
+            "npcs": []
+        },
+        {
+            "name": "hallway",
+            "description": "You are in a long, ancient hallway, seemingly spanning infinitely in both directions.",
+            "directions": {
+                "north": 0
+            },
+            "items": [
+                {
+                    "name": "key",
+                    "description": "The key is shiny, but looks slightly bent due to overuse.",
+                    "location": "cabinet"
+                }
+            ],
+            "npcs": [
+                {
+                    "name": "test",
+                    "randomMobility": 1
+                }
+            ]
+        }
+    ]
+}
