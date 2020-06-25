@@ -81,6 +81,8 @@ for i in range(0, len(rooms)):
         Npc(npc["name"], rooms[i], npc["randomMobility"], npc["defaultReply"])
 
 def pollConnection():
+    global ingameTime
+
     nextInput = host.handleInput("", False)
 
     if re.compile(":join (.*)").match(nextInput) != None:
