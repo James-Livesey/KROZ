@@ -96,7 +96,7 @@ class Player(Entity):
             self.output("    - drop {}".format(item.name))
         
         for npc in self.room.npcs:
-            player.output("    - talk to {}".format(npc.name))
+            self.output("    - talk to {}".format(npc.name))
 
         self.output("    - inventory")
     
