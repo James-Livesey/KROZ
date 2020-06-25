@@ -24,8 +24,9 @@
             ],
             "npcs": [
                 {
-                    "name": "test",
-                    "randomMobility": 1
+                    "name": "villager",
+                    "randomMobility": 1,
+                    "defaultReply": "Hi there, {playerName}!"
                 }
             ]
         }

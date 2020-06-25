@@ -45,10 +45,11 @@ class Entity:
             raise ItemLogisticsError("No item to drop")
 
 class Npc(Entity):
-    def __init__(self, name, room, randomMobility = NO_RANDOM_MOBILITY):
+    def __init__(self, name, room, randomMobility = NO_RANDOM_MOBILITY, defaultReply = "Hello!"):
         super().__init__(name, room)
 
         self.randomMobility = randomMobility
+        self.defaultReply = defaultReply
 
         self.room.npcs.append(self)
     
@@ -59,6 +60,9 @@ class Npc(Entity):
             self.room.npcs.append(self)
         else:
             raise DirectionalityError("Cannot go in that direction")
+    
+    def speak(self, player):
+        return self.defaultReply.replace("{playerName}", player.name)
 
     def tick(self, ingameTime):
         if self.randomMobility != NO_RANDOM_MOBILITY:
@@ -90,6 +94,9 @@ class Player(Entity):
         
         for item in self.inventory:
             self.output("    - drop {}".format(item.name))
+        
+        for npc in self.room.npcs:
+            player.output("    - talk to {}".format(npc.name))
 
         self.output("    - inventory")
     
@@ -119,6 +126,15 @@ class Player(Entity):
             super().drop(itemName)
         except ItemLogisticsError:
             self.output("You have no {} to drop.".format(itemName.lower()))
+    
+    def talkTo(self, npcName):
+        for npc in self.room.npcs:
+            if npcName == npc.name.lower():
+                self.output("The {} says: {}".format(npc.name, npc.speak(self)))
+
+                return
+        
+        self.output("There is no {} to talk to around here.".format(npcName))
     
     def viewInventory(self):
         if len(self.inventory) > 0:
@@ -153,6 +169,8 @@ class Player(Entity):
             self.drop(re.compile("drop the (.*)").match(command).group(1))
         elif re.compile("drop (.*)").match(command) != None:
             self.drop(re.compile("drop (.*)").match(command).group(1))
+        elif re.compile("talk to (.*)").match(command) != None:
+            self.talkTo(re.compile("talk to (.*)").match(command).group(1))
         elif command == "inventory":
             self.viewInventory()
         else:

@@ -78,7 +78,7 @@ for i in range(0, len(rooms)):
         rooms[i].items.append(Item(item["name"], item["description"], item["location"]))
     
     for npc in schematic["rooms"][i]["npcs"]:
-        Npc(npc["name"], rooms[i], npc["randomMobility"])
+        Npc(npc["name"], rooms[i], npc["randomMobility"], npc["defaultReply"])
 
 def pollConnection():
     nextInput = host.handleInput("", False)
