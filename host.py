@@ -31,7 +31,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         global targetPlayer, inputBuffer, outputBuffer
 
         path = urllib.parse.unquote(self.path)
-        returnMessage = "KROZ"
+        returnMessage = "KROZ V0.1.0"
 
         if path == "/":
             pass
